@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
@@ -310,7 +311,7 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }, [unit, API_KEY]); // Dependencies for useCallback
+  }, []); // Changed: Removed 'unit' and 'API_KEY' from dependencies as they are passed as arguments or are constants.
 
   // Effect hook to refetch forecast when the unit changes, but only after an initial search has been performed.
   useEffect(() => {
@@ -324,9 +325,6 @@ function App() {
   const handleSearchImmediate = (inputCity = city) => {
     // Ensure inputCity is always treated as a string for safety
     const cityValue = String(inputCity || '').trim();
-
-    // Clear any pending debounced search
-    // The debounceTimerRef is now managed within SearchBar, so we don't clear it here.
 
     // Ensure the city state is up-to-date before fetching
     if (cityValue === '') {
@@ -346,7 +344,7 @@ function App() {
   // Function to handle debounced search action (typing in input)
   const handleSearchDebounced = (inputCity) => {
     // Ensure inputCity is always treated as a string for safety
-    const cityValue = String(inputCity || '').trim();
+    const cityValue = String(inputCity || '').trim(); // This line declares and uses cityValue
 
     // This function's purpose is now solely to clear previous results
     // when the user is typing or has cleared the input, without fetching.
